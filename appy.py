@@ -168,6 +168,19 @@ totales = pd.DataFrame({
 })
 
 # =============================
+# 📊 Validación de columnas requeridas
+# =============================
+required_cols = ["COD_TDA", "NOM_TDA", "W-3", "W-2", "W-1", "W0", "PERIODO_1", "PERIODO_2", "OBJETIVO"]
+missing = [c for c in required_cols if c not in base.columns]
+if missing:
+    st.warning(
+        "No se puede generar el tablero aún. Falta(n) columna(s): " + ", ".join(missing) +
+        "
+👉 Revisa en la barra lateral que hayas subido el Excel y mapeado las 4 semanas %, los dos periodos y el objetivo."
+    )
+    st.stop()
+
+# =============================
 # 📊 Layout principal
 # =============================
 left, mid, right = st.columns([1.2, 1.2, 0.9])
